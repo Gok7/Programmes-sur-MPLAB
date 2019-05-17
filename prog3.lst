@@ -1,0 +1,117 @@
+CCS PCH C Compiler, Version 4.091, 48179               30-nov.-12 09:35
+
+               Filename: prog3.lst
+
+               ROM used: 146 bytes (0%)
+                         Largest free fragment is 32622
+               RAM used: 6 (0%) at main() level
+                         7 (0%) worst case
+               Stack:    1 locations
+
+*
+0000:  GOTO   0054
+.................... #include <18F452.h> 
+.................... //////// Standard Header file for the PIC18F452 device //////////////// 
+.................... #device PIC18F452 
+.................... #list 
+....................  
+....................  #fuses XT,NOWDT,NOLVP 
+....................  #use delay (clock=4M) 
+0004:  CLRF   FEA
+0006:  MOVLW  06
+0008:  MOVWF  FE9
+000A:  MOVF   FEF,W
+000C:  BZ    002A
+000E:  MOVLW  01
+0010:  MOVWF  01
+0012:  CLRF   00
+0014:  DECFSZ 00,F
+0016:  BRA    0014
+0018:  DECFSZ 01,F
+001A:  BRA    0012
+001C:  MOVLW  4A
+001E:  MOVWF  00
+0020:  DECFSZ 00,F
+0022:  BRA    0020
+0024:  BRA    0026
+0026:  DECFSZ FEF,F
+0028:  BRA    000E
+002A:  GOTO   0072 (RETURN)
+002E:  MOVLW  15
+0030:  SUBWF  07,F
+0032:  BNC   0050
+0034:  CLRF   FEA
+0036:  MOVLW  07
+0038:  MOVWF  FE9
+003A:  MOVLW  FC
+003C:  ANDWF  FEF,F
+003E:  BCF    FD8.0
+0040:  RRCF   FEF,F
+0042:  RRCF   FEF,F
+0044:  MOVF   FEF,W
+0046:  BZ    0050
+0048:  BRA    004C
+004A:  NOP   
+004C:  DECFSZ FEF,F
+004E:  BRA    004A
+0050:  GOTO   007C (RETURN)
+....................  #use fast_io(c) 
+....................  #use fast_io(d) 
+....................  
+....................  
+.................... void main (void) { 
+0054:  CLRF   FF8
+0056:  BCF    FD0.7
+0058:  CLRF   FEA
+005A:  CLRF   FE9
+005C:  BSF    FC1.0
+005E:  BSF    FC1.1
+0060:  BSF    FC1.2
+0062:  BCF    FC1.3
+....................  
+.................... set_tris_c (0xFB); 
+0064:  MOVLW  FB
+0066:  MOVWF  F94
+....................  
+.................... while (true) 
+....................  
+.................... { 
+....................  
+....................   output_c (0xFB); 
+0068:  MOVLW  FB
+006A:  MOVWF  F8B
+....................   delay_us (1500); 
+006C:  MOVLW  01
+006E:  MOVWF  06
+0070:  BRA    0004
+0072:  MOVLW  02
+0074:  MOVWF  06
+0076:  MOVLW  F7
+0078:  MOVWF  07
+007A:  BRA    002E
+007C:  DECFSZ 06,F
+007E:  BRA    0076
+....................   output_c (0xFF); 
+0080:  MOVLW  FF
+0082:  MOVWF  F8B
+....................   delay_us (500);   
+0084:  MOVLW  A6
+0086:  MOVWF  00
+0088:  DECFSZ 00,F
+008A:  BRA    0088
+008C:  NOP   
+....................  
+....................  
+.................... } 
+008E:  BRA    0068
+.................... } 
+0090:  SLEEP 
+
+Configuration Fuses:
+   Word  1: 2100   XT NOOSCSEN
+   Word  2: 0E0E   BROWNOUT WDT128 NOWDT BORV20 PUT
+   Word  3: 0100   CCP2C1
+   Word  4: 0081   STVREN NODEBUG NOLVP
+   Word  5: C00F   NOPROTECT NOCPD NOCPB
+   Word  6: E00F   NOWRT NOWRTD NOWRTB NOWRTC
+   Word  7: 400F   NOEBTR NOEBTRB

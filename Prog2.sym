@@ -1,0 +1,52 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @SCRATCH
+006     main.@SCRATCH1
+F83     PSP_DATA
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PROGRAM_MEMORY.P2
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+0004  main
+0004  @cinit
+
+
+User Memory space: 
+
+Project Directory:
+    C:\Documents and Settings\florian-wesley\Mes documents\
+
+Project Files:
+    Prog2.c
+    ..\..\..\Program Files\PICC\devices\18F452.h
+
+Units:
+    C:\Documents and Settings\florian-wesley\Mes documents\Prog2.c (main)
+
+Compiler Settings:
+    Processor:      PIC18F452
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      Prog2.err
+    INHX32:      Prog2.hex
+    Symbols:     Prog2.sym
+    List:        Prog2.lst
+    Debug/COFF:  Prog2.cof
+    Project:     Prog2.PJT
+    Call Tree:   Prog2.tre

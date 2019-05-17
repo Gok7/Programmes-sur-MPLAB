@@ -1,0 +1,91 @@
+CCS PCH C Compiler, Version 4.091, 48179               23-nov.-12 14:38
+
+               Filename: projectt wizard.lst
+
+               ROM used: 102 bytes (0%)
+                         Largest free fragment is 32666
+               RAM used: 16 (1%) at main() level
+                         16 (1%) worst case
+               Stack:    0 locations
+
+*
+0000:  GOTO   0004
+.................... #include <18F452.h> 
+.................... //////// Standard Header file for the PIC18F452 device //////////////// 
+.................... #device PIC18F452 
+.................... #list 
+....................  
+.................... #fuses XT,NOWDT,NOLVP 
+....................  
+.................... void main () 
+.................... { 
+0004:  CLRF   FF8
+0006:  BCF    FD0.7
+0008:  CLRF   FEA
+000A:  CLRF   FE9
+000C:  BSF    FC1.0
+000E:  BSF    FC1.1
+0010:  BSF    FC1.2
+0012:  BCF    FC1.3
+....................     unsigned char * PORTC; 
+....................     unsigned char * PORTD; 
+....................     unsigned char * TRISC; 
+....................     unsigned char * TRISD; 
+....................  
+.................... 	PORTC = 0xF82; 
+0014:  MOVLW  0F
+0016:  MOVWF  07
+0018:  MOVLW  82
+001A:  MOVWF  06
+.................... 	PORTD = 0xF83; 
+001C:  MOVLW  0F
+001E:  MOVWF  09
+0020:  MOVLW  83
+0022:  MOVWF  08
+.................... 	TRISC = 0xF94; 
+0024:  MOVLW  0F
+0026:  MOVWF  0B
+0028:  MOVLW  94
+002A:  MOVWF  0A
+.................... 	TRISD = 0xF95; 
+002C:  MOVLW  0F
+002E:  MOVWF  0D
+0030:  MOVLW  95
+0032:  MOVWF  0C
+....................  
+.................... 	*TRISC = 0xFF;	//FF pour port configuré en entrée 
+0034:  MOVFF  0B,FEA
+0038:  MOVFF  0A,FE9
+003C:  MOVLW  FF
+003E:  MOVWF  FEF
+.................... 	*TRISD = 0x00;	//00 pour port configuré en sortie 
+0040:  MOVFF  0D,FEA
+0044:  MOVFF  0C,FE9
+0048:  CLRF   FEF
+....................  
+.................... 	While(true){ 
+....................  
+....................  
+.................... 	*PORTD = *PORTC; 
+004A:  MOVFF  06,FE9
+004E:  MOVFF  07,FEA
+0052:  MOVFF  FEF,10
+0056:  MOVFF  09,FEA
+005A:  MOVFF  08,FE9
+005E:  MOVFF  10,FEF
+.................... } 
+0062:  BRA    004A
+....................  
+....................  
+....................  
+.................... } 
+0064:  SLEEP 
+
+Configuration Fuses:
+   Word  1: 2100   XT NOOSCSEN
+   Word  2: 0E0E   BROWNOUT WDT128 NOWDT BORV20 PUT
+   Word  3: 0100   CCP2C1
+   Word  4: 0081   STVREN NODEBUG NOLVP
+   Word  5: C00F   NOPROTECT NOCPD NOCPB
+   Word  6: E00F   NOWRT NOWRTD NOWRTB NOWRTC
+   Word  7: 400F   NOEBTR NOEBTRB

@@ -1,0 +1,23 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=C:\Documents and Settings\Administrateur\Bureau\Prog MPLAB\compte.o
+Folder=Intermediary
+[File001]
+Location=compte.HEX
+Folder=Output
+[File002]
+Location=compte.LST
+Folder=Output
+[File003]
+Location=compte.PJT
+Folder=Output
+[File004]
+Location=compte.ERR
+Folder=Output
+[File005]
+Location=compte.COF
+Folder=Output
+[TOOL_LOC_STAMPS]
+tool_loc{0C155615-B197-4A4B-AEB6-343BB3F41A35}=C:\Program files\Picc\CCSC.exe

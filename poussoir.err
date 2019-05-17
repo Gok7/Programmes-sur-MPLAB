@@ -1,0 +1,7 @@
+*** Error 101 "poussoir.c" Line 6(5,19): Library not found   "DELAY_US"
+*** Error 12 "poussoir.c" Line 18(10,17): Undefined identifier   input_b
+*** Error 12 "poussoir.c" Line 23(17,18): Undefined identifier  -- DELAY_MS
+*** Error 12 "poussoir.c" Line 29(17,18): Undefined identifier  -- DELAY_MS
+*** Error 12 "poussoir.c" Line 34(8,15): Undefined identifier   input_b
+*** Error 12 "poussoir.c" Line 36(16,17): Undefined identifier  -- DELAY_MS
+      6 Errors,  0 Warnings.

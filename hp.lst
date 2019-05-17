@@ -1,0 +1,68 @@
+CCS PCH C Compiler, Version 4.091, 48179               30-nov.-12 13:13
+
+               Filename: hp.lst
+
+               ROM used: 58 bytes (0%)
+                         Largest free fragment is 32710
+               RAM used: 5 (0%) at main() level
+                         5 (0%) worst case
+               Stack:    0 locations
+
+*
+0000:  GOTO   0004
+.................... #include <18F452.h> 
+.................... //////// Standard Header file for the PIC18F452 device //////////////// 
+.................... #device PIC18F452 
+.................... #list 
+....................  
+.................... #fuses XT,NOWDT,NOLVP 
+.................... #use delay (clock=4000000) 
+....................  
+.................... void main () 
+.................... {	 
+0004:  CLRF   FF8
+0006:  BCF    FD0.7
+0008:  CLRF   FEA
+000A:  CLRF   FE9
+000C:  BSF    FC1.0
+000E:  BSF    FC1.1
+0010:  BSF    FC1.2
+0012:  BCF    FC1.3
+.................... 	set_tris_c(0x00); 
+0014:  MOVLW  00
+0016:  MOVWF  F94
+....................  
+.................... While(true){ 
+.................... 		output_c (0x00); 
+0018:  CLRF   F94
+001A:  CLRF   F8B
+.................... 		delay_us( 500); 
+001C:  MOVLW  A6
+001E:  MOVWF  00
+0020:  DECFSZ 00,F
+0022:  BRA    0020
+0024:  NOP   
+.................... 		output_c(0xff); 
+0026:  CLRF   F94
+0028:  MOVLW  FF
+002A:  MOVWF  F8B
+.................... 		delay_us(500);  	 
+002C:  MOVLW  A6
+002E:  MOVWF  00
+0030:  DECFSZ 00,F
+0032:  BRA    0030
+0034:  NOP   
+....................  
+.................... 	} 
+0036:  BRA    0018
+.................... } 
+0038:  SLEEP 
+
+Configuration Fuses:
+   Word  1: 2100   XT NOOSCSEN
+   Word  2: 0E0E   BROWNOUT WDT128 NOWDT BORV20 PUT
+   Word  3: 0100   CCP2C1
+   Word  4: 0081   STVREN NODEBUG NOLVP
+   Word  5: C00F   NOPROTECT NOCPD NOCPB
+   Word  6: E00F   NOWRT NOWRTD NOWRTB NOWRTC
+   Word  7: 400F   NOEBTR NOEBTRB

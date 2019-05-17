@@ -1,0 +1,194 @@
+CCS PCH C Compiler, Version 4.091, 48179               30-nov.-12 16:56
+
+               Filename: compte.lst
+
+               ROM used: 240 bytes (1%)
+                         Largest free fragment is 32528
+               RAM used: 10 (1%) at main() level
+                         11 (1%) worst case
+               Stack:    1 locations
+
+*
+0000:  GOTO   002C
+.................... #include <18F452.h> 
+.................... //////// Standard Header file for the PIC18F452 device //////////////// 
+.................... #device PIC18F452 
+.................... #list 
+....................  
+.................... #fuses XT,NOWDT,NOLVP 
+.................... #use fast_io(B) 
+.................... #use fast_io(D 
+.................... #use delay (clock=4000000) 
+0004:  CLRF   FEA
+0006:  MOVLW  0B
+0008:  MOVWF  FE9
+000A:  MOVF   FEF,W
+000C:  BZ    002A
+000E:  MOVLW  01
+0010:  MOVWF  01
+0012:  CLRF   00
+0014:  DECFSZ 00,F
+0016:  BRA    0014
+0018:  DECFSZ 01,F
+001A:  BRA    0012
+001C:  MOVLW  4A
+001E:  MOVWF  00
+0020:  DECFSZ 00,F
+0022:  BRA    0020
+0024:  BRA    0026
+0026:  DECFSZ FEF,F
+0028:  BRA    000E
+002A:  RETLW  00
+....................  
+.................... void main () 
+.................... {	 
+002C:  CLRF   FF8
+002E:  BCF    FD0.7
+0030:  CLRF   FEA
+0032:  CLRF   FE9
+0034:  BSF    FC1.0
+0036:  BSF    FC1.1
+0038:  BSF    FC1.2
+003A:  BCF    FC1.3
+.................... int sortie_led=1; 
+003C:  MOVLW  01
+003E:  MOVWF  06
+.................... int bouton=1;//bouton relaché 
+0040:  MOVWF  07
+.................... int fin=0; 
+0042:  CLRF   08
+.................... int fin1=0; 
+0044:  CLRF   09
+.................... SET_TRIS_D(0x00); 
+0046:  MOVLW  00
+0048:  MOVWF  F95
+.................... SET_TRIS_B(0xFF); 
+004A:  MOVLW  FF
+004C:  MOVWF  F93
+.................... set_tris_c(0x00); 
+004E:  MOVLW  00
+0050:  MOVWF  F94
+.................... While(true){ 
+....................  
+.................... bouton=input(PIN_B0); 
+0052:  CLRF   07
+0054:  BTFSC  F81.0
+0056:  INCF   07,F
+....................  
+.................... if(bouton==0){ 
+0058:  MOVF   07,F
+005A:  BNZ   00EC
+.................... 		    output_d(sortie_led); 
+005C:  MOVFF  06,F8C
+.................... 			delay_ms( 500); 
+0060:  MOVLW  02
+0062:  MOVWF  0A
+0064:  MOVLW  FA
+0066:  MOVWF  0B
+0068:  RCALL  0004
+006A:  DECFSZ 0A,F
+006C:  BRA    0064
+.................... 		while(fin1!=100){ 
+006E:  MOVF   09,W
+0070:  SUBLW  64
+0072:  BZ    0096
+.................... 		output_c (0x00); 
+0074:  CLRF   F94
+0076:  CLRF   F8B
+.................... 		delay_us(500); 
+0078:  MOVLW  A6
+007A:  MOVWF  00
+007C:  DECFSZ 00,F
+007E:  BRA    007C
+0080:  NOP   
+.................... 		output_c(0xff); 
+0082:  CLRF   F94
+0084:  MOVLW  FF
+0086:  MOVWF  F8B
+.................... 		delay_us(500); 
+0088:  MOVLW  A6
+008A:  MOVWF  00
+008C:  DECFSZ 00,F
+008E:  BRA    008C
+0090:  NOP   
+.................... 		fin1++; 
+0092:  INCF   09,F
+.................... 		} 
+0094:  BRA    006E
+.................... 	bouton=1; 
+0096:  MOVLW  01
+0098:  MOVWF  07
+.................... 	sortie_led=1; 
+009A:  MOVWF  06
+.................... 	 
+....................  
+.................... 	fin=0; 
+009C:  CLRF   08
+.................... 		 
+.................... 	while(fin!=8){ 
+009E:  MOVF   08,W
+00A0:  SUBLW  08
+00A2:  BZ    00EC
+.................... 		while(fin1!=100){ 
+00A4:  MOVF   09,W
+00A6:  SUBLW  64
+00A8:  BZ    00CC
+.................... 		output_c (0x00); 
+00AA:  CLRF   F94
+00AC:  CLRF   F8B
+.................... 		delay_us(500); 
+00AE:  MOVLW  A6
+00B0:  MOVWF  00
+00B2:  DECFSZ 00,F
+00B4:  BRA    00B2
+00B6:  NOP   
+.................... 		output_c(0xff); 
+00B8:  CLRF   F94
+00BA:  MOVLW  FF
+00BC:  MOVWF  F8B
+.................... 		delay_us(500); 
+00BE:  MOVLW  A6
+00C0:  MOVWF  00
+00C2:  DECFSZ 00,F
+00C4:  BRA    00C2
+00C6:  NOP   
+.................... 		fin1++; 
+00C8:  INCF   09,F
+.................... 		} 
+00CA:  BRA    00A4
+....................         output_d(sortie_led); 
+00CC:  MOVFF  06,F8C
+.................... 		sortie_led=sortie_led<<1; 
+00D0:  BCF    FD8.0
+00D2:  RLCF   06,F
+.................... 		output_d(sortie_led); 	 
+00D4:  MOVFF  06,F8C
+.................... 		delay_ms( 500); 
+00D8:  MOVLW  02
+00DA:  MOVWF  0A
+00DC:  MOVLW  FA
+00DE:  MOVWF  0B
+00E0:  RCALL  0004
+00E2:  DECFSZ 0A,F
+00E4:  BRA    00DC
+.................... 		fin1=0; 
+00E6:  CLRF   09
+....................  
+.................... 		fin++; 
+00E8:  INCF   08,F
+.................... 		} 
+00EA:  BRA    009E
+.................... 		} 
+.................... 	} 
+00EC:  BRA    0052
+.................... } 
+00EE:  SLEEP 
+
+Configuration Fuses:
+   Word  1: 2100   XT NOOSCSEN
+   Word  2: 0E0E   BROWNOUT WDT128 NOWDT BORV20 PUT
+   Word  3: 0100   CCP2C1
+   Word  4: 0081   STVREN NODEBUG NOLVP
+   Word  5: C00F   NOPROTECT NOCPD NOCPB
+   Word  6: E00F   NOWRT NOWRTD NOWRTB NOWRTC
+   Word  7: 400F   NOEBTR NOEBTRB

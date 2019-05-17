@@ -1,0 +1,58 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @SCRATCH
+006     main.sortie_led
+007     main.bouton
+008     main.fin
+009     main.fin1
+00A     main.@SCRATCH1
+00B     @delay_ms1.P1
+F83     PSP_DATA
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PROGRAM_MEMORY.P2
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+0004  @delay_ms1
+002C  main
+002C  @cinit
+
+
+User Memory space: 
+
+Project Directory:
+    C:\Documents and Settings\Administrateur\Bureau\Prog MPLAB\
+
+Project Files:
+    compte.c
+    ..\..\..\..\Program Files\PICC\devices\18F452.h
+
+Units:
+    compte.c (main)
+
+Compiler Settings:
+    Processor:      PIC18F452
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      compte.err
+    INHX32:      compte.hex
+    Symbols:     compte.sym
+    List:        compte.lst
+    Debug/COFF:  compte.cof
+    Project:     compte.PJT
+    Call Tree:   compte.tre

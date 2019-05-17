@@ -1,0 +1,127 @@
+CCS PCH C Compiler, Version 4.091, 48179               30-nov.-12 15:38
+
+               Filename: hp1.lst
+
+               ROM used: 138 bytes (0%)
+                         Largest free fragment is 32630
+               RAM used: 7 (0%) at main() level
+                         8 (1%) worst case
+               Stack:    1 locations
+
+*
+0000:  GOTO   002E
+.................... #include <18F452.H> 
+.................... //////// Standard Header file for the PIC18F452 device //////////////// 
+.................... #device PIC18F452 
+.................... #list 
+....................  
+.................... #fuses XT,NOWDT,NOLVP 
+.................... #use fast_io(B) 
+.................... #use fast_io(D) 
+.................... #use delay (clock=4000000) 
+0004:  CLRF   FEA
+0006:  MOVLW  08
+0008:  MOVWF  FE9
+000A:  MOVF   FEF,W
+000C:  BZ    002A
+000E:  MOVLW  01
+0010:  MOVWF  01
+0012:  CLRF   00
+0014:  DECFSZ 00,F
+0016:  BRA    0014
+0018:  DECFSZ 01,F
+001A:  BRA    0012
+001C:  MOVLW  4A
+001E:  MOVWF  00
+0020:  DECFSZ 00,F
+0022:  BRA    0020
+0024:  BRA    0026
+0026:  DECFSZ FEF,F
+0028:  BRA    000E
+002A:  GOTO   007C (RETURN)
+....................  
+.................... void main (void) { 
+002E:  CLRF   FF8
+0030:  BCF    FD0.7
+0032:  CLRF   FEA
+0034:  CLRF   FE9
+0036:  BSF    FC1.0
+0038:  BSF    FC1.1
+003A:  BSF    FC1.2
+003C:  BCF    FC1.3
+.................... int etat=1; 
+003E:  MOVLW  01
+0040:  MOVWF  06
+.................... int bouton=1; 
+0042:  MOVWF  07
+.................... SET_TRIS_B(0xFF); 
+0044:  MOVLW  FF
+0046:  MOVWF  F93
+.................... SET_TRIS_D(0x3F); 
+0048:  MOVLW  3F
+004A:  MOVWF  F95
+.................... output_D  (0x40); 
+004C:  MOVLW  40
+004E:  MOVWF  F8C
+....................  
+.................... while(true) { 
+.................... bouton=input(PIN_B0); 
+0050:  CLRF   07
+0052:  BTFSC  F81.0
+0054:  INCF   07,F
+....................  
+.................... if(bouton==0){ 
+0056:  MOVF   07,F
+0058:  BNZ   007C
+.................... 	 
+.................... 	switch (etat){ 
+005A:  MOVF   06,W
+005C:  BZ    0064
+005E:  XORLW  01
+0060:  BZ    006E
+0062:  BRA    0076
+.................... 		case 0 : etat=1; 
+0064:  MOVLW  01
+0066:  MOVWF  06
+.................... 				 output_D  (0x80); 
+0068:  MOVLW  80
+006A:  MOVWF  F8C
+.................... 				  
+.................... 				 break; 
+006C:  BRA    0076
+....................  
+.................... 		case 1 : etat=0; 
+006E:  CLRF   06
+.................... 				 output_D  (0x40); 
+0070:  MOVLW  40
+0072:  MOVWF  F8C
+.................... 				  
+.................... 				 break; 
+0074:  BRA    0076
+.................... 	          }; 
+.................... 			delay_ms(10);		 
+0076:  MOVLW  0A
+0078:  MOVWF  08
+007A:  BRA    0004
+.................... 			} 
+.................... 	do{ 
+.................... 	bouton=input(PIN_B0); 
+007C:  CLRF   07
+007E:  BTFSC  F81.0
+0080:  INCF   07,F
+.................... 	}while(bouton==0); 
+0082:  MOVF   07,F
+0084:  BZ    007C
+.................... 	} 
+0086:  BRA    0050
+.................... } 
+0088:  SLEEP 
+
+Configuration Fuses:
+   Word  1: 2100   XT NOOSCSEN
+   Word  2: 0E0E   BROWNOUT WDT128 NOWDT BORV20 PUT
+   Word  3: 0100   CCP2C1
+   Word  4: 0081   STVREN NODEBUG NOLVP
+   Word  5: C00F   NOPROTECT NOCPD NOCPB
+   Word  6: E00F   NOWRT NOWRTD NOWRTB NOWRTC
+   Word  7: 400F   NOEBTR NOEBTRB
